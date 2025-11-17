@@ -13,10 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('kode_user', 20)->nullable()->index();
+            $table->string('name', 100);
+            $table->string('telepon', 20)->nullable();
+            $table->enum('status', ['active', 'inactive', 'blocked'])->default('inactive');
+            $table->enum('role', ['admin', 'trader', 'user'])->default('user');
+            $table->string('email', 150)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('foto', 255)->nullable();
+            $table->enum('otp_type', ['Y', 'N'])->default('N');  // 'Y' for enabled, 'N' for disabled
+            $table->string('otp', 6)->nullable()->index();  
+            $table->timestamp('otp_expired_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
