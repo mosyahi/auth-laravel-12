@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('telepon', 20)->nullable();
             $table->enum('status', ['active', 'inactive', 'blocked'])->default('inactive');
-            $table->enum('role', ['admin', 'trader', 'user'])->default('user');
+            $table->unsignedTinyInteger('role');
             $table->string('email', 150)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
